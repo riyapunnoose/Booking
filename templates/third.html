@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<title>Login</title>
+</head>
+<style>
+
+	.login-form {
+        animation-name: slideFromBottom;
+        animation-duration: 2s;
+		border-radius: 30px;
+		box-shadow: 0px 10px 15px 2px black;
+		margin-top: 10%;
+	    margin-left:40%;
+		width:  450px;
+		position: absolute;
+
+	}
+    @keyframes slideFromBottom {
+        0%{margin-top:50%;
+            opacity: 0;}
+        25%{opacity: 0;}
+        40%{opacity: 0;}
+        100%{margin-top:10%;}
+    }
+	.login-form h1{
+		font-size: 40px;
+		text-align: center;
+		text-transform: uppercase;
+		margin: 40px 0;
+	}
+	.login-form p{
+		font-size: 30px;
+		margin: 15px 0;
+	}
+	.login-form input{
+		font-size: 16px;
+		width: 50%;
+		padding: 15px 10px;
+		border: -2;
+		outline: ;
+		border-radius: 5px;
+
+	}
+	.login-form button{
+		font-size: 18px;
+		font-weight: bold;
+		margin: 20px 0;
+		padding: 10px 15px;
+		width: 50%;
+		border-radius: 5px;
+		border: 0;
+	}
+
+	/* Style the video: 100% width and height to cover the entire window */
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+/* Add some content at the bottom of the video/page */
+.content {
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Style the button used to pause/play the video */
+#myBtn {
+  width: 200px;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#myBtn:hover {
+  background: #ddd;
+  color: black;
+}
+	</style>
+
+<body>
+<!-- The video -->
+    <body style="background-image: url({% static 'image/img40.jpg'%}); background-repeat:no-repeat; background-size:cover;">
+
+
+<!-- Optional: some overlay text to describe the video -->
+
+   <center>
+	<div class="login-form">
+        <h1 style="color:white;">Login Form</h1>
+	<form action="log" method="post">
+		{% csrf_token %}
+		 {% if messages %}
+        {% for message in messages %}
+        <div class="alert {{message.tags}} alert-dismissible fade show">
+            <button type="button" class="btn-close" style="width:20px;margin-top: 0px;" data-bs-dismiss="alert"></button>
+            <strong><i class="fa fa-warning"></i></strong> {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+		<input type="text" name="username" placeholder="Username" required><br><br>
+		<input type="password" name="password" placeholder="Password" required><br><br>
+		<button  type="submit" class="btn btn-primary">LOGIN</button>
+
+	</form>
+  <!-- Button trigger modal -->
+<a href=""      data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+Forgot Password
+</a>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Forgot Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+          <form action="Forgotpass" method="post">
+            {% csrf_token %}
+              Enter Your E-mail:  <input type="email" name="email" placeholder="Enter the mail" required>
+               <button type="submit" class="btn btn-primary">Send</button>
+                 </form>
+          </div>
+    </div>
+  </div>
+</div>
+    <form action="login" method="post">
+          {% csrf_token %}
+         <center><button type="submit">New User</button></center>
+	</form>
+	</div>
+   </center>
+</body>
+</html>
